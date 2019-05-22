@@ -1858,8 +1858,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createTeam: function createTeam() {
-      axios.post('/team/api/group/' + this.id + '/teams', this.teamToDB);
-      setTimeout(this.update, 100);
+      var _this2 = this;
+
+      var b = this.teams.some(function (team) {
+        return team.name == _this2.teamToDB.teamName;
+      });
+
+      if (!b) {
+        axios.post('/team/api/group/' + this.id + '/teams', this.teamToDB);
+        setTimeout(this.update, 100);
+      }
     },
     destroy: function destroy(team) {
       var group = this.id;
@@ -1867,10 +1875,10 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(this.update, 100);
     },
     update: function update() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/team/api/group/' + this.id).then(function (response) {
-        _this2.teams = response.data;
+        _this3.teams = response.data;
       });
     }
   }

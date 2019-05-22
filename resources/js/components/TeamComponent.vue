@@ -31,8 +31,13 @@
         },
         methods: {
             createTeam: function() {
-                axios.post('/team/api/group/'+ this.id +'/teams', this.teamToDB);
-                setTimeout(this.update,100)
+                let b = this.teams.some((team) => {
+                    return team.name == this.teamToDB.teamName
+                });
+                if (!b) {
+                    axios.post('/team/api/group/' + this.id + '/teams', this.teamToDB);
+                    setTimeout(this.update, 100)
+                }
             },
             destroy: function(team) {
                 let group = this.id;
