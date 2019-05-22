@@ -1791,9 +1791,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/team/api/group');
       setTimeout(this.update, 100);
     },
-    destroy: function destroy(id) {
-      axios["delete"]('/team/api/group/' + id);
-      setTimeout(this.update, 500);
+    destroy: function destroy(group) {
+      axios["delete"]('/team/api/group/' + group.id);
+      this.groups.splice(this.groups.indexOf(group), 1);
     },
     update: function update() {
       var _this2 = this;
@@ -1890,19 +1890,22 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(this.update, 100);
     },
     createMatches: function createMatches() {
+      var _this3 = this;
+
       var request = {
         groupID: this.id
       };
-      axios.post('/team/api/group/' + this.id + '/matches', request);
-      setTimeout(this.update, 200);
+      axios.post('/team/api/group/' + this.id + '/matches', request).then(function (response) {
+        return _this3.matches = response.data;
+      });
     },
     update: function update() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.id = this.$route.params.id;
       axios.get('/team/api/group/' + this.id).then(function (response) {
-        _this3.teams = response.data.teams;
-        _this3.matches = response.data.matches;
+        _this4.teams = response.data.teams;
+        _this4.matches = response.data.matches;
       });
     }
   }
@@ -37930,7 +37933,7 @@ var render = function() {
                     staticClass: "hidden",
                     on: {
                       click: function($event) {
-                        return _vm.destroy(group.id)
+                        return _vm.destroy(group)
                       }
                     }
                   },
@@ -37967,99 +37970,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("p", [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Back")])], 1),
-      _vm._v(" "),
-      _c("label", [_vm._v("Team: ")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.teamToDB.teamName,
-            expression: "teamToDB.teamName"
-          }
-        ],
-        attrs: { type: "text", required: "" },
-        domProps: { value: _vm.teamToDB.teamName },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.teamToDB, "teamName", $event.target.value)
-          }
+  return _c("div", [
+    _c("p", [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Back")])], 1),
+    _vm._v(" "),
+    _c("label", [_vm._v("Team: ")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.teamToDB.teamName,
+          expression: "teamToDB.teamName"
         }
-      }),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.createTeam } }, [_vm._v("Add")]),
-      _vm._v(" "),
+      ],
+      attrs: { type: "text", required: "" },
+      domProps: { value: _vm.teamToDB.teamName },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.$set(_vm.teamToDB, "teamName", $event.target.value)
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.createTeam } }, [_vm._v("Add")]),
+    _vm._v(" "),
+    _c(
+      "ol",
       _vm._l(_vm.teams, function(team) {
-        return _c("ol", [
-          _c("li", [
-            _vm._v(_vm._s(team.name) + " "),
-            _c(
-              "span",
-              {
-                staticClass: "pointer",
-                on: {
-                  click: function($event) {
-                    return _vm.destroy(team.id)
-                  }
+        return _c("li", [
+          _vm._v(_vm._s(team.name) + " "),
+          _c(
+            "span",
+            {
+              staticClass: "pointer",
+              on: {
+                click: function($event) {
+                  return _vm.destroy(team.id)
                 }
-              },
-              [_vm._v("X")]
-            )
-          ])
+              }
+            },
+            [_vm._v("X")]
+          )
         ])
       }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "button",
+        {
+          attrs: { disabled: _vm.teams.length < 2 ? true : false },
+          on: { click: _vm.createMatches }
+        },
+        [_vm._v("Generate")]
+      ),
       _vm._v(" "),
-      _c("div", [
-        _c(
-          "button",
-          {
-            attrs: { disabled: _vm.teams.length < 2 ? true : false },
-            on: { click: _vm.createMatches }
-          },
-          [_vm._v("Generate")]
-        ),
-        _vm._v(" "),
-        _vm.matches.length > 0
-          ? _c("div", [
-              _c(
-                "table",
-                _vm._l(_vm.matches, function(match) {
-                  return _c("tr", [
-                    _c("th", [_vm._v(_vm._s(match.team1))]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _c("input", {
-                        attrs: { type: "text" },
-                        domProps: { value: match.team1_point }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v(_vm._s(match.team2))]),
-                    _vm._v(" "),
-                    _c("th", [
-                      _c("input", {
-                        attrs: { type: "text" },
-                        domProps: { value: match.team2_point }
-                      })
-                    ])
+      _vm.matches.length > 0
+        ? _c("div", [
+            _c(
+              "table",
+              _vm._l(_vm.matches, function(match) {
+                return _c("tr", [
+                  _c("th", [_vm._v(_vm._s(match.team1))]),
+                  _vm._v(" "),
+                  _c("th", [
+                    _c("input", {
+                      attrs: { type: "text" },
+                      domProps: { value: match.team1_point }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(match.team2))]),
+                  _vm._v(" "),
+                  _c("th", [
+                    _c("input", {
+                      attrs: { type: "text" },
+                      domProps: { value: match.team2_point }
+                    })
                   ])
-                }),
-                0
-              )
-            ])
-          : _vm._e()
-      ])
-    ],
-    2
-  )
+                ])
+              }),
+              0
+            )
+          ])
+        : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

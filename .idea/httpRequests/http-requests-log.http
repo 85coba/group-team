@@ -1,3 +1,19 @@
+POST http://localhost/team/api/group/296/matches?groupID=296
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T114733.200.html
+
+###
+
+POST http://localhost/team/api/group/260/matches?groupID=296
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T114646.200.html
+
+###
+
 GET http://localhost/team/api/group/260
 Accept: */*
 Cache-Control: no-cache

@@ -40,7 +40,6 @@ class MatchesController extends Controller
     {
         //
         $id = $request->groupID;
-        dump($id);
         $group = Group::find($id);
         $teams = $group->teams->all();
         $i = 0;
@@ -48,7 +47,6 @@ class MatchesController extends Controller
             $teamArr[$i] = $team->name;
             $i++;
         }
-
         $len = count($teamArr);
         $matches=[];
         for ($i = 0; $i < $len; $i++) {
@@ -57,9 +55,11 @@ class MatchesController extends Controller
                 $match->team1 = $teamArr[$i];
                 $match->team2 = $teamArr[$j];
                 $match->group_id = $id;
+                array_push($matches,$match);
                 $match->save();
             }
         }
+        return $matches;
     }
 
     /**

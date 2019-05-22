@@ -128,5 +128,7 @@ class Groups extends Controller
         foreach ($matches as $match)
             Match::destroy($match->id);
         Group::destroy($id);
+
+        return response()->json(['error' => false]);
     }
 }

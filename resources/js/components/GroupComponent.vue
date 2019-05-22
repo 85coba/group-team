@@ -2,7 +2,7 @@
     <div>
         <div><button @click="newgroup">New</button>
         <ul v-for="group in groups">
-            <li><div class="trigger"><span  @click="show(group.id)">{{ group.name }} </span><div class="hidden" @click="destroy(group.id)">X</div></div></li>
+            <li><div class="trigger"><span  @click="show(group.id)">{{ group.name }} </span><div class="hidden" @click="destroy(group)">X</div></div></li>
         </ul></div>
     </div>
 </template>
@@ -23,11 +23,11 @@
         methods: {
             newgroup: function () {
                 axios.post('/team/api/group');
-                setTimeout(this.update,100)
+                setTimeout(this.update, 100)
             },
-            destroy: function (id) {
-                axios.delete('/team/api/group/'+id);
-                setTimeout(this.update,500)
+            destroy: function (group) {
+                axios.delete('/team/api/group/' + group.id);
+                this.groups.splice(this.groups.indexOf(group),1);
             },
             update: function () {
                 axios.get('/team/api/group').then((response) => {

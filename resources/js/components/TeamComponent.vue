@@ -4,8 +4,8 @@
             <label>Team: </label>
             <input type="text" v-model="teamToDB.teamName" required>
             <button @click="createTeam">Add</button>
-        <ol v-for="team in teams">
-            <li>{{team.name}} <span class="pointer" @click="destroy(team.id)">X</span></li>
+        <ol>
+            <li v-for="team in teams">{{team.name}} <span class="pointer" @click="destroy(team.id)">X</span></li>
         </ol>
         <div>
             <button @click="createMatches" :disabled="teams.length < 2 ? true : false">Generate</button>
@@ -61,8 +61,7 @@
             },
             createMatches: function() {
                 let request = {groupID : this.id};
-                axios.post('/team/api/group/' + this.id + '/matches', request);
-                setTimeout(this.update,200)
+                axios.post('/team/api/group/' + this.id + '/matches', request).then((response) => (this.matches = response.data));
             },
             update: function () {
                 this.id = this.$route.params.id;
