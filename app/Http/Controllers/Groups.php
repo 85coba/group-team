@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Group;
 use App\Team;
+use App\Match;
 
 class Groups extends Controller
 {
@@ -17,7 +18,7 @@ class Groups extends Controller
     {
         //Show all Groups
 
-        return  Group::all()->toJson();
+        return  Group::all();
     }
 
     /**
@@ -76,9 +77,14 @@ class Groups extends Controller
     {
         //
         $group = Group::find($id);
-        $team = $group->teams->all();
 
-        return $team;
+        $teams = $group->teams->all();
+
+        $matches = $group->matches->all();
+
+        $response = ['teams' => $teams, 'matches' => $matches];
+
+        return $response;
     }
 
     /**
@@ -112,8 +118,15 @@ class Groups extends Controller
      */
     public function destroy($id)
     {
-        //Delete group by id.
+        //Delete group by id, and all nested models
 
+        $group = Group::find($id);
+        $teams = $group->teams->all();
+        foreach ($teams as $team)
+            Team::destroy($team->id);
+        $matches = $group->matches->all();
+        foreach ($matches as $match)
+            Match::destroy($match->id);
         Group::destroy($id);
     }
 }

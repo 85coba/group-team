@@ -27,7 +27,7 @@
             },
             destroy: function (id) {
                 axios.delete('/team/api/group/'+id);
-                setTimeout(this.update,100)
+                setTimeout(this.update,500)
             },
             update: function () {
                 axios.get('/team/api/group').then((response) => {

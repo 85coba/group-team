@@ -7,6 +7,19 @@
         <ol v-for="team in teams">
             <li>{{team.name}} <span class="pointer" @click="destroy(team.id)">X</span></li>
         </ol>
+        <div>
+            <button @click="createMatches" :disabled="teams.length < 2 ? true : false">Generate</button>
+            <div v-if="matches.length > 0">
+                <table>
+                    <tr v-for="match in matches">
+                        <th>{{ match.team1 }}</th>
+                        <th><input type="text" :value="match.team1_point"></th>
+                        <th>{{ match.team2 }}</th>
+                        <th><input type="text" :value="match.team2_point"></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -17,6 +30,7 @@
             return {
                 id: this.$route.params.id,
                 teams: [],
+                matches: [],
                 teamToDB: {
                     groupID: this.$route.params.id,
                     teamName: '',
@@ -26,7 +40,8 @@
         mounted() {
             this.id = this.$route.params.id;
             axios.get('/team/api/group/' + this.id).then((response) => {
-                this.teams = response.data
+                this.teams = response.data.teams;
+                this.matches = response.data.matches;
             });
         },
         methods: {
@@ -44,9 +59,16 @@
                 axios.delete('/team/api/group/'+group+'/teams/'+team);
                 setTimeout(this.update,100)
             },
+            createMatches: function() {
+                let request = {groupID : this.id};
+                axios.post('/team/api/group/' + this.id + '/matches', request);
+                setTimeout(this.update,200)
+            },
             update: function () {
+                this.id = this.$route.params.id;
                 axios.get('/team/api/group/' + this.id).then((response) => {
-                    this.teams = response.data
+                    this.teams = response.data.teams;
+                    this.matches = response.data.matches;
                 });
             }
 

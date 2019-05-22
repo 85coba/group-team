@@ -1,3 +1,115 @@
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080319.200.json
+
+###
+
+GET http://localhost/team/api/group
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080137.200.json
+
+###
+
+GET http://localhost/team/api/group
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080123.200.html
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080106.200.json
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080041.200.html
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T080023.200.json
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075940.200.html
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075923.200.html
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075755.200.json
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075719.500.html
+
+###
+
+GET http://localhost/team/api/group/260
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075626.500.html
+
+###
+
+GET http://localhost/team/api/group/261
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075611.500.html
+
+###
+
+GET http://localhost/team/api/group/261
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075435.500.html
+
+###
+
+GET http://localhost/team/api/group/261
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-05-22T075432.500.html
+
+###
+
 GET http://localhost/team/api/group/261
 Accept: */*
 Cache-Control: no-cache

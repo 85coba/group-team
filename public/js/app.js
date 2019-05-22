@@ -1793,7 +1793,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     destroy: function destroy(id) {
       axios["delete"]('/team/api/group/' + id);
-      setTimeout(this.update, 100);
+      setTimeout(this.update, 500);
     },
     update: function update() {
       var _this2 = this;
@@ -1836,12 +1836,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TeamComponent",
   data: function data() {
     return {
       id: this.$route.params.id,
       teams: [],
+      matches: [],
       teamToDB: {
         groupID: this.$route.params.id,
         teamName: ''
@@ -1853,7 +1867,8 @@ __webpack_require__.r(__webpack_exports__);
 
     this.id = this.$route.params.id;
     axios.get('/team/api/group/' + this.id).then(function (response) {
-      _this.teams = response.data;
+      _this.teams = response.data.teams;
+      _this.matches = response.data.matches;
     });
   },
   methods: {
@@ -1874,11 +1889,20 @@ __webpack_require__.r(__webpack_exports__);
       axios["delete"]('/team/api/group/' + group + '/teams/' + team);
       setTimeout(this.update, 100);
     },
+    createMatches: function createMatches() {
+      var request = {
+        groupID: this.id
+      };
+      axios.post('/team/api/group/' + this.id + '/matches', request);
+      setTimeout(this.update, 200);
+    },
     update: function update() {
       var _this3 = this;
 
+      this.id = this.$route.params.id;
       axios.get('/team/api/group/' + this.id).then(function (response) {
-        _this3.teams = response.data;
+        _this3.teams = response.data.teams;
+        _this3.matches = response.data.matches;
       });
     }
   }
@@ -37991,7 +38015,48 @@ var render = function() {
             )
           ])
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "button",
+          {
+            attrs: { disabled: _vm.teams.length < 2 ? true : false },
+            on: { click: _vm.createMatches }
+          },
+          [_vm._v("Generate")]
+        ),
+        _vm._v(" "),
+        _vm.matches.length > 0
+          ? _c("div", [
+              _c(
+                "table",
+                _vm._l(_vm.matches, function(match) {
+                  return _c("tr", [
+                    _c("th", [_vm._v(_vm._s(match.team1))]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _c("input", {
+                        attrs: { type: "text" },
+                        domProps: { value: match.team1_point }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(_vm._s(match.team2))]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _c("input", {
+                        attrs: { type: "text" },
+                        domProps: { value: match.team2_point }
+                      })
+                    ])
+                  ])
+                }),
+                0
+              )
+            ])
+          : _vm._e()
+      ])
     ],
     2
   )

@@ -12,4 +12,8 @@ class Group extends Model
     public function teams() {
         return $this->hasMany('App\Team');
     }
+
+    public function matches() {
+        return $this->hasMany('App\Match');
+    }
 }

@@ -17,5 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('group','Groups');
+Route::Resource('group','Groups');
 Route::Resource('group.teams','TeamsController')->only(['store','destroy']);
+Route::Resource('group.matches','MatchesController')->only(['store','update']);
