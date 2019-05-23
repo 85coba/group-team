@@ -5,7 +5,7 @@
             <input type="text" v-model="teamToDB.teamName" required>
             <button @click="createTeam">Add</button>
         <ol>
-            <li v-for="team in teams">{{team.name}} <span class="pointer" @click="destroy(team.id)">X</span></li>
+            <li v-for="team in teams">{{team.name}} <span v-if="isPoints(team.name)" class="pointer" @click="destroy(team.id)">X</span></li>
         </ol>
         <div>
             <button @click="createMatches" :disabled="teams.length < 2 ? true : false">Generate</button>
@@ -14,8 +14,9 @@
                     <tr v-for="match in matches">
                         <th>{{ match.team1 }}</th>
                         <th><input type="text" v-model="match.team1_point" @change="updatePoints(1, match.team1_point, match.id)"></th>
-                        <th>{{ match.team2 }}</th>
+                        <th> : </th>
                         <th><input type="text" v-model="match.team2_point" @change="updatePoints(2, match.team2_point, match.id)"></th>
+                        <th>{{ match.team2 }}</th>
                     </tr>
                 </table>
             </div>
@@ -45,6 +46,12 @@
             });
         },
         methods: {
+            isPoints: function (teamName) {
+                let b = this.matches.some((match) =>{
+                  return (match.team1 == teamName && match.team1_point > 0) || (match.team2 == teamName && match.team2_point > 0);
+                });
+                return !b;
+            },
             createTeam: function() {
                 let b = this.teams.some((team) => {
                     return team.name == this.teamToDB.teamName
@@ -61,7 +68,8 @@
             },
             createMatches: function() {
                 let request = {groupID : this.id};
-                axios.post('/team/api/group/' + this.id + '/matches', request).then((response) => (this.matches = response.data));
+                axios.post('/team/api/group/' + this.id + '/matches', request).then((response) => {this.matches = response.data});
+                setTimeout(this.update, 200)
             },
             updatePoints: function(teamNum, point, matchID) {
                 let request = {team: teamNum, point: point};

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Team;
+use App\Match;
 
 class TeamsController extends Controller
 {
@@ -87,6 +88,8 @@ class TeamsController extends Controller
     public function destroy($groupID, $teamID)
     {
         //
+        $team= Team::find($teamID);
+        Match::where('team1',$team->name)->orWhere('team2',$team->name)->delete();
         Team::destroy($teamID);
     }
 }

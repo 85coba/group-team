@@ -1849,6 +1849,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TeamComponent",
   data: function data() {
@@ -1872,6 +1873,12 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    isPoints: function isPoints(teamName) {
+      var b = this.matches.some(function (match) {
+        return match.team1 == teamName && match.team1_point > 0 || match.team2 == teamName && match.team2_point > 0;
+      });
+      return !b;
+    },
     createTeam: function createTeam() {
       var _this2 = this;
 
@@ -1896,8 +1903,9 @@ __webpack_require__.r(__webpack_exports__);
         groupID: this.id
       };
       axios.post('/team/api/group/' + this.id + '/matches', request).then(function (response) {
-        return _this3.matches = response.data;
+        _this3.matches = response.data;
       });
+      setTimeout(this.update, 200);
     },
     updatePoints: function updatePoints(teamNum, point, matchID) {
       var request = {
@@ -38010,18 +38018,20 @@ var render = function() {
       _vm._l(_vm.teams, function(team) {
         return _c("li", [
           _vm._v(_vm._s(team.name) + " "),
-          _c(
-            "span",
-            {
-              staticClass: "pointer",
-              on: {
-                click: function($event) {
-                  return _vm.destroy(team.id)
-                }
-              }
-            },
-            [_vm._v("X")]
-          )
+          _vm.isPoints(team.name)
+            ? _c(
+                "span",
+                {
+                  staticClass: "pointer",
+                  on: {
+                    click: function($event) {
+                      return _vm.destroy(team.id)
+                    }
+                  }
+                },
+                [_vm._v("X")]
+              )
+            : _vm._e()
         ])
       }),
       0
@@ -38075,7 +38085,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("th", [_vm._v(_vm._s(match.team2))]),
+                  _c("th", [_vm._v(" : ")]),
                   _vm._v(" "),
                   _c("th", [
                     _c("input", {
@@ -38105,7 +38115,9 @@ var render = function() {
                         }
                       }
                     })
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v(_vm._s(match.team2))])
                 ])
               }),
               0
