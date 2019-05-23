@@ -13,9 +13,9 @@
                 <table>
                     <tr v-for="match in matches">
                         <th>{{ match.team1 }}</th>
-                        <th><input type="text" :value="match.team1_point"></th>
+                        <th><input type="text" v-model="match.team1_point" @change="updatePoints(1, match.team1_point, match.id)"></th>
                         <th>{{ match.team2 }}</th>
-                        <th><input type="text" :value="match.team2_point"></th>
+                        <th><input type="text" v-model="match.team2_point" @change="updatePoints(2, match.team2_point, match.id)"></th>
                     </tr>
                 </table>
             </div>
@@ -62,6 +62,10 @@
             createMatches: function() {
                 let request = {groupID : this.id};
                 axios.post('/team/api/group/' + this.id + '/matches', request).then((response) => (this.matches = response.data));
+            },
+            updatePoints: function(teamNum, point, matchID) {
+                let request = {team: teamNum, point: point};
+                axios.put('/team/api/group/'+ this.id + '/matches/' + matchID, request);
             },
             update: function () {
                 this.id = this.$route.params.id;

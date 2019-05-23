@@ -91,10 +91,11 @@ class MatchesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $groupID, $id)
     {
         //
         $match = Match::find($id);
+        dump($id);
         switch ($request->team) {
             case 1:
                 $match->team1_point = $request->point;

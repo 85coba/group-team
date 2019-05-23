@@ -1899,6 +1899,13 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.matches = response.data;
       });
     },
+    updatePoints: function updatePoints(teamNum, point, matchID) {
+      var request = {
+        team: teamNum,
+        point: point
+      };
+      axios.put('/team/api/group/' + this.id + '/matches/' + matchID, request);
+    },
     update: function update() {
       var _this4 = this;
 
@@ -38040,8 +38047,31 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: match.team1_point,
+                          expression: "match.team1_point"
+                        }
+                      ],
                       attrs: { type: "text" },
-                      domProps: { value: match.team1_point }
+                      domProps: { value: match.team1_point },
+                      on: {
+                        change: function($event) {
+                          return _vm.updatePoints(
+                            1,
+                            match.team1_point,
+                            match.id
+                          )
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(match, "team1_point", $event.target.value)
+                        }
+                      }
                     })
                   ]),
                   _vm._v(" "),
@@ -38049,8 +38079,31 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: match.team2_point,
+                          expression: "match.team2_point"
+                        }
+                      ],
                       attrs: { type: "text" },
-                      domProps: { value: match.team2_point }
+                      domProps: { value: match.team2_point },
+                      on: {
+                        change: function($event) {
+                          return _vm.updatePoints(
+                            2,
+                            match.team2_point,
+                            match.id
+                          )
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(match, "team2_point", $event.target.value)
+                        }
+                      }
                     })
                   ])
                 ])
