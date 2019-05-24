@@ -35,7 +35,7 @@ import TeamComponent from './components/TeamComponent.vue';
 
 const routes = [
     {path:'/', component:GroupComponent, name:'index'},
-    {path:'/group/:id', component:TeamComponent, name:'teams'}
+    {path:'/group/:name', component:TeamComponent, name:'teams'}
 ];
 
 const router = new VueRouter({base: '/team', mode: 'history', routes });

@@ -1807,8 +1807,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'teams',
         params: {
-          id: id,
-          name: name
+          name: name,
+          id: id
         }
       });
     }
@@ -53006,7 +53006,7 @@ var routes = [{
   component: _components_GroupComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: 'index'
 }, {
-  path: '/group/:id',
+  path: '/group/:name',
   component: _components_TeamComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: 'teams'
 }];

@@ -36,7 +36,7 @@
                 });
             },
             show: function(id,name) {
-                this.$router.push({name:'teams', params: {id,name}});
+                this.$router.push({name:'teams', params: {name,id}});
             }
         }
     }
