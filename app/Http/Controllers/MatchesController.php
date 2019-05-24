@@ -38,9 +38,15 @@ class MatchesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Create list of matches
+
         $id = $request->groupID;
         $group = Group::find($id);
+        $matches = $group->matches->all();
+
+        foreach ($matches as $match)
+            Match::destroy($match->id);
+        
         $teams = $group->teams->all();
         $i = 0;
         foreach ($teams as $team){
@@ -117,5 +123,6 @@ class MatchesController extends Controller
     public function destroy($id)
     {
         //
+
     }
 }

@@ -4,9 +4,9 @@
         <p>Group: {{ groupName }} </p>
             <label>Team: </label>
             <input type="text" v-model="teamToDB.teamName" required>
-            <button :disabled="teamToDB.teamName ==''" @click="createTeam">Add</button>
+            <button :disabled="teamToDB.teamName==''" @click="createTeam">Add</button>
         <ol>
-            <li v-for="team in teams">{{team.name}} <span v-if="isPoints(team.name)" class="pointer" @click="destroy(team.id)">X</span></li>
+            <li class="item" v-for="team in teams"><span class="xclose" v-if="isPoints(team.name)" @click="destroy(team.id)">⤫</span> {{team.name}} </li>
         </ol>
         <div>
             <button @click="createMatches" :disabled="teams.length < 2 ? true : false">Generate</button>
@@ -37,7 +37,8 @@
                 teamToDB: {
                     groupID: this.$route.params.id,
                     teamName: '',
-                }
+                },
+                isActive: true
             }
         },
         mounted() {
@@ -76,6 +77,11 @@
             updatePoints: function(teamNum, point, matchID) {
                 let request = {team: teamNum, point: point};
                 axios.put('/team/api/group/'+ this.id + '/matches/' + matchID, request);
+
+                this.isActive = this.matches.some((match) => {
+                    return match.team1_point == 0 && match.team2_point == 0;
+                });
+                alert(this.isActive)
             },
             update: function () {
                 axios.get('/team/api/group/' + this.id).then((response) => {
@@ -91,7 +97,16 @@
 </script>
 
 <style scoped>
-.pointer {
+
+.item {
+    position: relative;
+    margin-bottom: 5px;
+    -webkit-transition: 1.3s;
+    transition: .3s;
+}
+.xclose {
+    position: absolute;
     cursor: pointer;
+    left: -2.5rem;
 }
 </style>

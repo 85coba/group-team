@@ -1863,7 +1863,8 @@ __webpack_require__.r(__webpack_exports__);
       teamToDB: {
         groupID: this.$route.params.id,
         teamName: ''
-      }
+      },
+      isActive: true
     };
   },
   mounted: function mounted() {
@@ -1915,6 +1916,10 @@ __webpack_require__.r(__webpack_exports__);
         point: point
       };
       axios.put('/team/api/group/' + this.id + '/matches/' + matchID, request);
+      this.isActive = this.matches.some(function (match) {
+        return match.team1_point == 0 && match.team2_point == 0;
+      });
+      alert(this.isActive);
     },
     update: function update() {
       var _this4 = this;
@@ -6407,7 +6412,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.pointer[data-v-4916dec5] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.item[data-v-4916dec5] {\n    position: relative;\n    margin-bottom: 5px;\n    transition: .3s;\n}\n.xclose[data-v-4916dec5] {\n    position: absolute;\n    cursor: pointer;\n    left: -2.5rem;\n}\n", ""]);
 
 // exports
 
@@ -38032,22 +38037,22 @@ var render = function() {
     _c(
       "ol",
       _vm._l(_vm.teams, function(team) {
-        return _c("li", [
-          _vm._v(_vm._s(team.name) + " "),
+        return _c("li", { staticClass: "item" }, [
           _vm.isPoints(team.name)
             ? _c(
                 "span",
                 {
-                  staticClass: "pointer",
+                  staticClass: "xclose",
                   on: {
                     click: function($event) {
                       return _vm.destroy(team.id)
                     }
                   }
                 },
-                [_vm._v("X")]
+                [_vm._v("⤫")]
               )
-            : _vm._e()
+            : _vm._e(),
+          _vm._v(" " + _vm._s(team.name) + " ")
         ])
       }),
       0
