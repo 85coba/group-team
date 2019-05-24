@@ -1,9 +1,10 @@
 <template>
     <div>
-        <p><router-link to="/">Back</router-link></p>
+        <p><router-link to="/"> ⟵ Back</router-link></p>
+        <p>Group: {{ groupName }} </p>
             <label>Team: </label>
             <input type="text" v-model="teamToDB.teamName" required>
-            <button @click="createTeam">Add</button>
+            <button :disabled="teamToDB.teamName ==''" @click="createTeam">Add</button>
         <ol>
             <li v-for="team in teams">{{team.name}} <span v-if="isPoints(team.name)" class="pointer" @click="destroy(team.id)">X</span></li>
         </ol>
@@ -30,6 +31,7 @@
         data: function() {
             return {
                 id: this.$route.params.id,
+                groupName : this.$route.params.name,
                 teams: [],
                 matches: [],
                 teamToDB: {
@@ -39,16 +41,18 @@
             }
         },
         mounted() {
-            this.id = this.$route.params.id;
+
             axios.get('/team/api/group/' + this.id).then((response) => {
                 this.teams = response.data.teams;
                 this.matches = response.data.matches;
+                this.groupName = response.data.groupName;
+                this.id = response.data.groupID;
             });
         },
         methods: {
             isPoints: function (teamName) {
                 let b = this.matches.some((match) =>{
-                  return (match.team1 == teamName && match.team1_point > 0) || (match.team2 == teamName && match.team2_point > 0);
+                    return (match.team1 == teamName || match.team2 == teamName) && (match.team1_point > 0 || match.team2_point > 0);
                 });
                 return !b;
             },
@@ -62,24 +66,23 @@
                 }
             },
             destroy: function(team) {
-                let group = this.id;
-                axios.delete('/team/api/group/'+group+'/teams/'+team);
+                axios.delete('/team/api/group/'+this.id+'/teams/'+team);
                 setTimeout(this.update,100)
             },
             createMatches: function() {
                 let request = {groupID : this.id};
                 axios.post('/team/api/group/' + this.id + '/matches', request).then((response) => {this.matches = response.data});
-                setTimeout(this.update, 200)
             },
             updatePoints: function(teamNum, point, matchID) {
                 let request = {team: teamNum, point: point};
                 axios.put('/team/api/group/'+ this.id + '/matches/' + matchID, request);
             },
             update: function () {
-                this.id = this.$route.params.id;
                 axios.get('/team/api/group/' + this.id).then((response) => {
                     this.teams = response.data.teams;
                     this.matches = response.data.matches;
+                    this.groupName = response.data.groupName;
+                    this.id = response.data.groupID;
                 });
             }
 

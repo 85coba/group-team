@@ -2,7 +2,7 @@
     <div>
         <div><button @click="newgroup">New</button>
         <ul v-for="group in groups">
-            <li><div class="trigger"><span  @click="show(group.id)">{{ group.name }} </span><div class="hidden" @click="destroy(group)">X</div></div></li>
+            <li><div class="trigger"><span  @click="show(group.id,group.name)">{{ group.name }} </span><div class="hidden" @click="destroy(group)">X</div></div></li>
         </ul></div>
     </div>
 </template>
@@ -34,8 +34,8 @@
                     this.groups = response.data
                 });
             },
-            show: function(id) {
-                this.$router.push({name:'teams', params: {id}});
+            show: function(id,name) {
+                this.$router.push({name:'teams', params: {id,name}});
             }
         }
     }

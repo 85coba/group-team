@@ -82,7 +82,7 @@ class Groups extends Controller
 
         $matches = $group->matches->all();
 
-        $response = ['teams' => $teams, 'matches' => $matches];
+        $response = ['groupID' => $id, 'groupName' => $group->name, 'teams' => $teams, 'matches' => $matches];
 
         return $response;
     }

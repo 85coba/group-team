@@ -1802,11 +1802,12 @@ __webpack_require__.r(__webpack_exports__);
         _this2.groups = response.data;
       });
     },
-    show: function show(id) {
+    show: function show(id, name) {
       this.$router.push({
         name: 'teams',
         params: {
-          id: id
+          id: id,
+          name: name
         }
       });
     }
@@ -1850,11 +1851,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TeamComponent",
   data: function data() {
     return {
       id: this.$route.params.id,
+      groupName: this.$route.params.name,
       teams: [],
       matches: [],
       teamToDB: {
@@ -1866,16 +1869,17 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    this.id = this.$route.params.id;
     axios.get('/team/api/group/' + this.id).then(function (response) {
       _this.teams = response.data.teams;
       _this.matches = response.data.matches;
+      _this.groupName = response.data.groupName;
+      _this.id = response.data.groupID;
     });
   },
   methods: {
     isPoints: function isPoints(teamName) {
       var b = this.matches.some(function (match) {
-        return match.team1 == teamName && match.team1_point > 0 || match.team2 == teamName && match.team2_point > 0;
+        return (match.team1 == teamName || match.team2 == teamName) && (match.team1_point > 0 || match.team2_point > 0);
       });
       return !b;
     },
@@ -1892,8 +1896,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     destroy: function destroy(team) {
-      var group = this.id;
-      axios["delete"]('/team/api/group/' + group + '/teams/' + team);
+      axios["delete"]('/team/api/group/' + this.id + '/teams/' + team);
       setTimeout(this.update, 100);
     },
     createMatches: function createMatches() {
@@ -1905,7 +1908,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/team/api/group/' + this.id + '/matches', request).then(function (response) {
         _this3.matches = response.data;
       });
-      setTimeout(this.update, 200);
     },
     updatePoints: function updatePoints(teamNum, point, matchID) {
       var request = {
@@ -1917,10 +1919,11 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       var _this4 = this;
 
-      this.id = this.$route.params.id;
       axios.get('/team/api/group/' + this.id).then(function (response) {
         _this4.teams = response.data.teams;
         _this4.matches = response.data.matches;
+        _this4.groupName = response.data.groupName;
+        _this4.id = response.data.groupID;
       });
     }
   }
@@ -37936,7 +37939,7 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        return _vm.show(group.id)
+                        return _vm.show(group.id, group.name)
                       }
                     }
                   },
@@ -37986,7 +37989,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Back")])], 1),
+    _c(
+      "p",
+      [_c("router-link", { attrs: { to: "/" } }, [_vm._v(" ⟵ Back")])],
+      1
+    ),
+    _vm._v(" "),
+    _c("p", [_vm._v("Group: " + _vm._s(_vm.groupName) + " ")]),
     _vm._v(" "),
     _c("label", [_vm._v("Team: ")]),
     _vm._v(" "),
@@ -38011,7 +38020,14 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c("button", { on: { click: _vm.createTeam } }, [_vm._v("Add")]),
+    _c(
+      "button",
+      {
+        attrs: { disabled: _vm.teamToDB.teamName == "" },
+        on: { click: _vm.createTeam }
+      },
+      [_vm._v("Add")]
+    ),
     _vm._v(" "),
     _c(
       "ol",
