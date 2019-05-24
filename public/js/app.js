@@ -1863,9 +1863,22 @@ __webpack_require__.r(__webpack_exports__);
       teamToDB: {
         groupID: this.$route.params.id,
         teamName: ''
-      },
-      isActive: true
+      }
     };
+  },
+  computed: {
+    isGames: function isGames() {
+      var isGames = this.matches.some(function (match) {
+        return match.team1_point != 0 || match.team2_point != 0;
+      });
+      return isGames;
+    },
+    isAdd: function isAdd() {
+      return this.isGames ? true : this.teamToDB.teamName == '';
+    },
+    isCreateMatches: function isCreateMatches() {
+      return this.isGames ? true : this.teams.length < 2 ? true : false;
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -1916,10 +1929,6 @@ __webpack_require__.r(__webpack_exports__);
         point: point
       };
       axios.put('/team/api/group/' + this.id + '/matches/' + matchID, request);
-      this.isActive = this.matches.some(function (match) {
-        return match.team1_point == 0 && match.team2_point == 0;
-      });
-      alert(this.isActive);
     },
     update: function update() {
       var _this4 = this;
@@ -38027,10 +38036,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "button",
-      {
-        attrs: { disabled: _vm.teamToDB.teamName == "" },
-        on: { click: _vm.createTeam }
-      },
+      { attrs: { disabled: _vm.isAdd }, on: { click: _vm.createTeam } },
       [_vm._v("Add")]
     ),
     _vm._v(" "),
@@ -38062,7 +38068,7 @@ var render = function() {
       _c(
         "button",
         {
-          attrs: { disabled: _vm.teams.length < 2 ? true : false },
+          attrs: { disabled: _vm.isCreateMatches },
           on: { click: _vm.createMatches }
         },
         [_vm._v("Generate")]

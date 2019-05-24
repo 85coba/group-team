@@ -4,12 +4,12 @@
         <p>Group: {{ groupName }} </p>
             <label>Team: </label>
             <input type="text" v-model="teamToDB.teamName" required>
-            <button :disabled="teamToDB.teamName==''" @click="createTeam">Add</button>
+            <button :disabled="isAdd" @click="createTeam">Add</button>
         <ol>
             <li class="item" v-for="team in teams"><span class="xclose" v-if="isPoints(team.name)" @click="destroy(team.id)">⤫</span> {{team.name}} </li>
         </ol>
         <div>
-            <button @click="createMatches" :disabled="teams.length < 2 ? true : false">Generate</button>
+            <button @click="createMatches" :disabled="isCreateMatches">Generate</button>
             <div v-if="matches.length > 0">
                 <table>
                     <tr v-for="match in matches">
@@ -38,7 +38,20 @@
                     groupID: this.$route.params.id,
                     teamName: '',
                 },
-                isActive: true
+            }
+        },
+        computed: {
+            isGames:function() {
+                let isGames = this.matches.some((match) => {
+                    return (match.team1_point != 0) || (match.team2_point != 0);
+                });
+                return isGames
+            },
+            isAdd: function() {
+               return this.isGames ? true : this.teamToDB.teamName =='';
+            },
+            isCreateMatches: function () {
+                return this.isGames ? true : (this.teams.length < 2 ? true : false);
             }
         },
         mounted() {
@@ -78,10 +91,7 @@
                 let request = {team: teamNum, point: point};
                 axios.put('/team/api/group/'+ this.id + '/matches/' + matchID, request);
 
-                this.isActive = this.matches.some((match) => {
-                    return match.team1_point == 0 && match.team2_point == 0;
-                });
-                alert(this.isActive)
+
             },
             update: function () {
                 axios.get('/team/api/group/' + this.id).then((response) => {

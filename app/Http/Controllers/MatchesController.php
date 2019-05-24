@@ -46,7 +46,7 @@ class MatchesController extends Controller
 
         foreach ($matches as $match)
             Match::destroy($match->id);
-        
+
         $teams = $group->teams->all();
         $i = 0;
         foreach ($teams as $team){
@@ -61,6 +61,8 @@ class MatchesController extends Controller
                 $match->team1 = $teamArr[$i];
                 $match->team2 = $teamArr[$j];
                 $match->group_id = $id;
+                $match->team1_point = 0;
+                $match->team2_point = 0;
                 array_push($matches,$match);
                 $match->save();
             }
