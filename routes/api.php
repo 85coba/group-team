@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::Resource('group','Groups');
+Route::Resource('group','Groups')->only(['index','store','show','destroy']);
 Route::Resource('group.teams','TeamsController')->only(['store','destroy']);
 Route::Resource('group.matches','MatchesController')->only(['store','update']);

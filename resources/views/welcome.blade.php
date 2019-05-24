@@ -12,56 +12,86 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #131313;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
+                font-family: sans-serif;
                 margin: 0;
             }
+            a {
+                text-decoration: none;
+              }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
+            .main {
                 display: flex;
                 justify-content: center;
+                padding: 3%
             }
 
-            .center {
+            .flex {
                 display: flex;
                 align-items: center;
-                align-content: center;
-                justify-content: center;
+                justify-content: space-between;
             }
-            .position-ref {
+            .flex-label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 20px 0;
+            }
+            button {
+                margin-left: 10px;
+                align-items: center;
+                justify-content: center;
+                background-color: #228b22;
+                color: white;
+                min-width: 100px;
+                padding: 5px;
+                cursor: pointer;
+                border-style: none;
+                font: 400 16px sans-serif;
+                border-radius: 4px;
+                -webkit-transition: background-color .5s ease;
+                transition: background-color .5s ease;
+            }
+            button:disabled {
+                color: white;
+                background-color: #aaaaaa
+            }
+            .input {
+                flex: 1 1;
+                margin: 0 10px;
+                outline: none;
+                border: 1px solid #a9a9a9;
+                padding: 5px;
+                border-radius: 4px;
+            }
+            .match-input {
+                text-align: center;
+                width: 40px;
+                flex: 1 1;
+                margin: 0 10px;
+                outline: none;
+                border: 1px solid #a9a9a9;
+                padding: 5px;
+                border-radius: 4px;
+            }
+            .item {
                 position: relative;
+                margin-bottom: 5px;
             }
 
-            .top-right {
+            .xclose {
                 position: absolute;
-                right: 10px;
-                top: 18px;
+                cursor: pointer;
+                left: -2.5rem;
+            }
+            * {
+                box-sizing: border-box
             }
 
-            .content {
-                align-content: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
         </style>
     </head>
     <body>
-            <div class="center">
-                    <div id="app" style="width: 400px">
+            <div class="main">
+                    <div id="app">
                         <router-view></router-view>
                     </div>
             </div>

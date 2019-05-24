@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div><button @click="newgroup">New</button>
+        <div class="flex"><span>Groups:</span><button @click="newgroup">New</button></div>
+        <div>
         <ul v-for="group in groups">
             <li><div class="trigger"><span  @click="show(group.id,group.name)">{{ group.name }} </span><div class="hidden" @click="destroy(group)">X</div></div></li>
         </ul></div>

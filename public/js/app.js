@@ -1772,6 +1772,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1825,6 +1826,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6403,25 +6416,6 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.trigger[data-v-6edbc169] {cursor: pointer}\n.hidden[data-v-6edbc169] { display: none;}\n.trigger:hover .hidden[data-v-6edbc169] { display: inline; cursor: pointer;}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.item[data-v-4916dec5] {\n    position: relative;\n    margin-bottom: 5px;\n    transition: .3s;\n}\n.xclose[data-v-4916dec5] {\n    position: absolute;\n    cursor: pointer;\n    left: -2.5rem;\n}\n", ""]);
 
 // exports
 
@@ -37309,36 +37303,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -37939,44 +37903,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "flex" }, [
+      _c("span", [_vm._v("Groups:")]),
+      _c("button", { on: { click: _vm.newgroup } }, [_vm._v("New")])
+    ]),
+    _vm._v(" "),
     _c(
       "div",
-      [
-        _c("button", { on: { click: _vm.newgroup } }, [_vm._v("New")]),
-        _vm._v(" "),
-        _vm._l(_vm.groups, function(group) {
-          return _c("ul", [
-            _c("li", [
-              _c("div", { staticClass: "trigger" }, [
-                _c(
-                  "span",
-                  {
-                    on: {
-                      click: function($event) {
-                        return _vm.show(group.id, group.name)
-                      }
+      _vm._l(_vm.groups, function(group) {
+        return _c("ul", [
+          _c("li", [
+            _c("div", { staticClass: "trigger" }, [
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.show(group.id, group.name)
                     }
-                  },
-                  [_vm._v(_vm._s(group.name) + " ")]
-                ),
-                _c(
-                  "div",
-                  {
-                    staticClass: "hidden",
-                    on: {
-                      click: function($event) {
-                        return _vm.destroy(group)
-                      }
+                  }
+                },
+                [_vm._v(_vm._s(group.name) + " ")]
+              ),
+              _c(
+                "div",
+                {
+                  staticClass: "hidden",
+                  on: {
+                    click: function($event) {
+                      return _vm.destroy(group)
                     }
-                  },
-                  [_vm._v("X")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("X")]
+              )
             ])
           ])
-        })
-      ],
-      2
+        ])
+      }),
+      0
     )
   ])
 }
@@ -38002,157 +37967,170 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "p",
-      [_c("router-link", { attrs: { to: "/" } }, [_vm._v(" ⟵ Back")])],
-      1
-    ),
-    _vm._v(" "),
-    _c("p", [_vm._v("Group: " + _vm._s(_vm.groupName) + " ")]),
-    _vm._v(" "),
-    _c("label", [_vm._v("Team: ")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.teamToDB.teamName,
-          expression: "teamToDB.teamName"
-        }
-      ],
-      attrs: { type: "text", required: "" },
-      domProps: { value: _vm.teamToDB.teamName },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+  return _c(
+    "div",
+    [
+      _c("router-link", { attrs: { to: "/" } }, [_vm._v(" ⟵ Back")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Group: " + _vm._s(_vm.groupName) + " ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex" }, [
+        _c("label", [_vm._v("Team: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.teamToDB.teamName,
+              expression: "teamToDB.teamName"
+            }
+          ],
+          staticClass: "input",
+          attrs: { type: "text", required: "" },
+          domProps: { value: _vm.teamToDB.teamName },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.teamToDB, "teamName", $event.target.value)
+            }
           }
-          _vm.$set(_vm.teamToDB, "teamName", $event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      { attrs: { disabled: _vm.isAdd }, on: { click: _vm.createTeam } },
-      [_vm._v("Add")]
-    ),
-    _vm._v(" "),
-    _c(
-      "ol",
-      _vm._l(_vm.teams, function(team) {
-        return _c("li", { staticClass: "item" }, [
-          _vm.isPoints(team.name)
-            ? _c(
-                "span",
-                {
-                  staticClass: "xclose",
-                  on: {
-                    click: function($event) {
-                      return _vm.destroy(team.id)
-                    }
-                  }
-                },
-                [_vm._v("⤫")]
-              )
-            : _vm._e(),
-          _vm._v(" " + _vm._s(team.name) + " ")
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c("div", [
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { attrs: { disabled: _vm.isAdd }, on: { click: _vm.createTeam } },
+          [_vm._v("Add")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-label" }, [_vm._v("Teams:")]),
+      _vm._v(" "),
       _c(
-        "button",
-        {
-          attrs: { disabled: _vm.isCreateMatches },
-          on: { click: _vm.createMatches }
-        },
-        [_vm._v("Generate")]
+        "ol",
+        _vm._l(_vm.teams, function(team) {
+          return _c("li", { staticClass: "item" }, [
+            _vm.isPoints(team.name)
+              ? _c(
+                  "span",
+                  {
+                    staticClass: "xclose",
+                    on: {
+                      click: function($event) {
+                        return _vm.destroy(team.id)
+                      }
+                    }
+                  },
+                  [_vm._v("⤫")]
+                )
+              : _vm._e(),
+            _vm._v(" " + _vm._s(team.name) + "\n        ")
+          ])
+        }),
+        0
       ),
       _vm._v(" "),
-      _vm.matches.length > 0
-        ? _c("div", [
+      _c("div", [
+        _c("div", [
+          _c("div", { staticClass: "flex-label" }, [
+            _vm._v("\n                Teams:\n                "),
             _c(
-              "table",
-              _vm._l(_vm.matches, function(match) {
-                return _c("tr", [
-                  _c("th", [_vm._v(_vm._s(match.team1))]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: match.team1_point,
-                          expression: "match.team1_point"
-                        }
-                      ],
-                      attrs: { type: "text" },
-                      domProps: { value: match.team1_point },
-                      on: {
-                        change: function($event) {
-                          return _vm.updatePoints(
-                            1,
-                            match.team1_point,
-                            match.id
-                          )
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(match, "team1_point", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v(" : ")]),
-                  _vm._v(" "),
-                  _c("th", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: match.team2_point,
-                          expression: "match.team2_point"
-                        }
-                      ],
-                      attrs: { type: "text" },
-                      domProps: { value: match.team2_point },
-                      on: {
-                        change: function($event) {
-                          return _vm.updatePoints(
-                            2,
-                            match.team2_point,
-                            match.id
-                          )
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(match, "team2_point", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v(_vm._s(match.team2))])
-                ])
-              }),
-              0
+              "button",
+              {
+                staticClass: "btn-info",
+                attrs: { disabled: _vm.isCreateMatches },
+                on: { click: _vm.createMatches }
+              },
+              [_vm._v("Generate")]
             )
           ])
-        : _vm._e()
-    ])
-  ])
+        ]),
+        _vm._v(" "),
+        _vm.matches.length > 0
+          ? _c("div", { staticClass: "flex" }, [
+              _c(
+                "table",
+                _vm._l(_vm.matches, function(match) {
+                  return _c("tr", [
+                    _c("th", [_vm._v(_vm._s(match.team1))]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: match.team1_point,
+                            expression: "match.team1_point"
+                          }
+                        ],
+                        staticClass: "match-input",
+                        attrs: { type: "text" },
+                        domProps: { value: match.team1_point },
+                        on: {
+                          change: function($event) {
+                            return _vm.updatePoints(
+                              1,
+                              match.team1_point,
+                              match.id
+                            )
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(match, "team1_point", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(" : ")]),
+                    _vm._v(" "),
+                    _c("th", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: match.team2_point,
+                            expression: "match.team2_point"
+                          }
+                        ],
+                        staticClass: "match-input",
+                        attrs: { type: "text" },
+                        domProps: { value: match.team2_point },
+                        on: {
+                          change: function($event) {
+                            return _vm.updatePoints(
+                              2,
+                              match.team2_point,
+                              match.id
+                            )
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(match, "team2_point", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(_vm._s(match.team2))])
+                  ])
+                }),
+                0
+              )
+            ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53200,9 +53178,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TeamComponent_vue_vue_type_template_id_4916dec5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TeamComponent.vue?vue&type=template&id=4916dec5&scoped=true& */ "./resources/js/components/TeamComponent.vue?vue&type=template&id=4916dec5&scoped=true&");
 /* harmony import */ var _TeamComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TeamComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TeamComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& */ "./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -53210,7 +53186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _TeamComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _TeamComponent_vue_vue_type_template_id_4916dec5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _TeamComponent_vue_vue_type_template_id_4916dec5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -53239,22 +53215,6 @@ component.options.__file = "resources/js/components/TeamComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TeamComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeamComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& ***!
-  \************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TeamComponent.vue?vue&type=style&index=0&id=4916dec5&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TeamComponent_vue_vue_type_style_index_0_id_4916dec5_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
