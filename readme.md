@@ -2,7 +2,7 @@
 <p>Реалізовано наступний функціонал:</p>
 <ol>
     <li>Створення та видалення груп</li>
-    <li>Додавання та видаленнякоманд у та з групи<li>
+    <li>Додавання та видаленнякоманд у та з групи</li>
     <li>Генерація матчів у групі</li>
     <li>Зміна результату конкретного матчу</li>
     <li>Дані такі як групи, команди та результати ігор зберігаються в базі даних</li>
@@ -14,7 +14,7 @@
     <li>Збереження даних - MySQL</li>
 </ol>
 <p>Список маршутів API:</p>
-   GET | api/group                         | App\Http\Controllers\Groups@index </br>
+   <p>GET | api/group                         | App\Http\Controllers\Groups@index </p>
   POST | api/group                         | App\Http\Controllers\Groups@store </br>
    GET | api/group/{group}                 | App\Http\Controllers\Groups@show  </br>
 DELETE | api/group/{group}                 | App\Http\Controllers\Groups@destroy </br>
