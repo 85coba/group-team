@@ -14,12 +14,12 @@
     <li>Збереження даних - MySQL</li>
 </ol>
 <p>Список маршутів API:</p>
-   GET | api/group                         | App\Http\Controllers\Groups@index
-  POST | api/group                         | App\Http\Controllers\Groups@store
-   GET | api/group/{group}                 | App\Http\Controllers\Groups@show
-DELETE | api/group/{group}                 | App\Http\Controllers\Groups@destroy
-  POST | api/group/{group}/matches         | App\Http\Controllers\MatchesController@store
-   PUT | api/group/{group}/matches/{match} | App\Http\Controllers\MatchesController@update
-  POST | api/group/{group}/teams           | App\Http\Controllers\TeamsController@store
-DELETE | api/group/{group}/teams/{team}    | App\Http\Controllers\TeamsController@destroy 
+   GET | api/group                         | App\Http\Controllers\Groups@index </br>
+  POST | api/group                         | App\Http\Controllers\Groups@store </br>
+   GET | api/group/{group}                 | App\Http\Controllers\Groups@show  </br>
+DELETE | api/group/{group}                 | App\Http\Controllers\Groups@destroy </br>
+  POST | api/group/{group}/matches         | App\Http\Controllers\MatchesController@store </br>
+   PUT | api/group/{group}/matches/{match} | App\Http\Controllers\MatchesController@update </br>
+  POST | api/group/{group}/teams           | App\Http\Controllers\TeamsController@store </br>
+DELETE | api/group/{group}/teams/{team}    | App\Http\Controllers\TeamsController@destroy </br>
     
