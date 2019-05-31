@@ -1773,6 +1773,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1782,30 +1791,30 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/team/api/group').then(function (response) {
+    axios.get("/team/api/group").then(function (response) {
       _this.groups = response.data;
     });
   },
   name: "GroupComponent",
   methods: {
     newgroup: function newgroup() {
-      axios.post('/team/api/group');
+      axios.post("/team/api/group");
       setTimeout(this.update, 100);
     },
     destroy: function destroy(group) {
-      axios["delete"]('/team/api/group/' + group.id);
+      axios["delete"]("/team/api/group/" + group.id);
       this.groups.splice(this.groups.indexOf(group), 1);
     },
     update: function update() {
       var _this2 = this;
 
-      axios.get('/team/api/group').then(function (response) {
+      axios.get("/team/api/group").then(function (response) {
         _this2.groups = response.data;
       });
     },
     show: function show(id, name) {
       this.$router.push({
-        name: 'teams',
+        name: "teams",
         params: {
           name: name,
           id: id
@@ -1865,6 +1874,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TeamComponent",
   data: function data() {
@@ -1875,7 +1898,7 @@ __webpack_require__.r(__webpack_exports__);
       matches: [],
       teamToDB: {
         groupID: this.$route.params.id,
-        teamName: ''
+        teamName: ""
       }
     };
   },
@@ -1887,7 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
       return isGames;
     },
     isAdd: function isAdd() {
-      return this.isGames ? true : this.teamToDB.teamName == '';
+      return this.isGames ? true : this.teamToDB.teamName == "";
     },
     isCreateMatches: function isCreateMatches() {
       return this.isGames ? true : this.teams.length < 2 ? true : false;
@@ -1896,7 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/team/api/group/' + this.id).then(function (response) {
+    axios.get("/team/api/group/" + this.id).then(function (response) {
       _this.teams = response.data.teams;
       _this.matches = response.data.matches;
       _this.groupName = response.data.groupName;
@@ -1918,12 +1941,12 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (!b) {
-        axios.post('/team/api/group/' + this.id + '/teams', this.teamToDB);
+        axios.post("/team/api/group/" + this.id + "/teams", this.teamToDB);
         setTimeout(this.update, 100);
       }
     },
     destroy: function destroy(team) {
-      axios["delete"]('/team/api/group/' + this.id + '/teams/' + team);
+      axios["delete"]("/team/api/group/" + this.id + "/teams/" + team);
       setTimeout(this.update, 100);
     },
     createMatches: function createMatches() {
@@ -1932,7 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
       var request = {
         groupID: this.id
       };
-      axios.post('/team/api/group/' + this.id + '/matches', request).then(function (response) {
+      axios.post("/team/api/group/" + this.id + "/matches", request).then(function (response) {
         _this3.matches = response.data;
       });
     },
@@ -1941,12 +1964,12 @@ __webpack_require__.r(__webpack_exports__);
         team: teamNum,
         point: point
       };
-      axios.put('/team/api/group/' + this.id + '/matches/' + matchID, request);
+      axios.put("/team/api/group/" + this.id + "/matches/" + matchID, request);
     },
     update: function update() {
       var _this4 = this;
 
-      axios.get('/team/api/group/' + this.id).then(function (response) {
+      axios.get("/team/api/group/" + this.id).then(function (response) {
         _this4.teams = response.data.teams;
         _this4.matches = response.data.matches;
         _this4.groupName = response.data.groupName;
@@ -6415,7 +6438,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.trigger[data-v-6edbc169] {cursor: pointer}\n.hidden[data-v-6edbc169] { display: none;}\n.trigger:hover .hidden[data-v-6edbc169] { display: inline; cursor: pointer;}\n", ""]);
+exports.push([module.i, "\n.trigger[data-v-6edbc169] {\n  cursor: pointer;\n}\n.hidden[data-v-6edbc169] {\n  display: none;\n}\n.trigger:hover .hidden[data-v-6edbc169] {\n  display: inline;\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -37905,6 +37928,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "flex" }, [
       _c("span", [_vm._v("Groups:")]),
+      _vm._v(" "),
       _c("button", { on: { click: _vm.newgroup } }, [_vm._v("New")])
     ]),
     _vm._v(" "),
@@ -37923,8 +37947,9 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(group.name) + " ")]
+                [_vm._v(_vm._s(group.name))]
               ),
+              _vm._v(" "),
               _c(
                 "div",
                 {
@@ -37970,12 +37995,14 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("router-link", { attrs: { to: "/" } }, [_vm._v(" ⟵ Back")]),
+      _c("router-link", { attrs: { to: "/" } }, [_vm._v("⟵ Back")]),
       _vm._v(" "),
-      _c("p", [_vm._v("Group: " + _vm._s(_vm.groupName) + " ")]),
+      _c("p", [_vm._v("Group: " + _vm._s(_vm.groupName))]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.id))]),
       _vm._v(" "),
       _c("div", { staticClass: "flex" }, [
-        _c("label", [_vm._v("Team: ")]),
+        _c("label", [_vm._v("Team:")]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -38026,7 +38053,7 @@ var render = function() {
                   [_vm._v("⤫")]
                 )
               : _vm._e(),
-            _vm._v(" " + _vm._s(team.name) + "\n        ")
+            _vm._v("\n      " + _vm._s(team.name) + "\n    ")
           ])
         }),
         0
@@ -38035,7 +38062,7 @@ var render = function() {
       _c("div", [
         _c("div", [
           _c("div", { staticClass: "flex-label" }, [
-            _vm._v("\n                Teams:\n                "),
+            _vm._v("\n        Teams:\n        "),
             _c(
               "button",
               {
@@ -38087,7 +38114,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("th", [_vm._v(" : ")]),
+                    _c("th", [_vm._v(":")]),
                     _vm._v(" "),
                     _c("th", [
                       _c("input", {
